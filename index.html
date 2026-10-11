@@ -348,6 +348,159 @@ body {
   outline: 2px solid #fff;
   outline-offset: 3px;
 }
+
+/* NATUSPAC EXPLORATION MODULES */
+.nsp-module {
+  margin: 35px 0;
+  padding: 20px;
+  border: 1px solid #173d5b;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #091525, #030711);
+  color: #dceeff;
+  overflow: hidden;
+}
+
+.nsp-module h2 {
+  color: #8eeeff;
+}
+
+.nsp-muted {
+  color: #9ab1c8;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.nsp-panel {
+  margin-top: 16px;
+  padding: 16px;
+  background: #06101e;
+  border: 1px solid #173d5b;
+  border-radius: 10px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.nsp-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 14px;
+}
+
+.nsp-module button {
+  padding: 10px 13px;
+  border: 1px solid #087f9f;
+  border-radius: 8px;
+  background: #0a2034;
+  color: #9defff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.nsp-module button:focus-visible,
+.nsp-module a:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+
+.nsp-module button:active {
+  background: #123d55;
+}
+
+.nsp-solar {
+  position: relative;
+  height: 230px;
+  margin-top: 18px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 12px;
+  background: radial-gradient(circle, #152b48, #02050c 72%);
+}
+
+.nsp-sun {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #ffca62;
+  box-shadow: 0 0 28px #ff9d37;
+  z-index: 2;
+}
+
+.nsp-orbit {
+  position: absolute;
+  width: var(--orbit);
+  height: var(--orbit);
+  border: 1px solid #45617b55;
+  border-radius: 50%;
+  animation: nsp-spin var(--speed) linear infinite;
+}
+
+.nsp-orbit::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--planet);
+  box-shadow: 0 0 12px var(--planet);
+}
+
+@keyframes nsp-spin {
+  to { transform: rotate(360deg); }
+}
+
+.nsp-planet-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 14px;
+}
+
+.nsp-planet-grid button {
+  min-width: 0;
+  text-align: left;
+}
+
+.nsp-module a {
+  color: #82eaff;
+}
+
+.nsp-canvas {
+  display: block;
+  width: 100%;
+  height: 250px;
+  margin-top: 14px;
+  border: 1px solid #173d5b;
+  border-radius: 10px;
+  background: #030711;
+  touch-action: manipulation;
+}
+
+.nsp-stat {
+  color: #8eeeff;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 380px) {
+  .nsp-module {
+    padding: 13px;
+  }
+
+  .nsp-planet-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nsp-orbit {
+    animation: none;
+  }
+}    
 </style>
 </head>
 <body>
@@ -545,9 +698,123 @@ Type help to see available commands.</span></div>
     </button>
   </div>
 </section>
+
+<!-- 1. NATUSPAC INTERACTIVE SOLAR SYSTEM -->
+<section id="solar-system" class="nsp-module">
+  <div class="nsp-stat">01 / PLANETARY EXPLORATION</div>
+  <h2>Interactive Solar System</h2>
+  <p class="nsp-muted">
+    Select a planet to discover its characteristics.
+    The animated orbital display is illustrative, not to scale.
+  </p>
+
+  <div class="nsp-solar" aria-label="Illustrative animated solar system">
+    <div class="nsp-sun"></div>
+    <div class="nsp-orbit"
+      style="--orbit:70px;--speed:4s;--planet:#aaa"></div>
+    <div class="nsp-orbit"
+      style="--orbit:105px;--speed:7s;--planet:#f3c77b"></div>
+    <div class="nsp-orbit"
+      style="--orbit:145px;--speed:11s;--planet:#65bfff"></div>
+    <div class="nsp-orbit"
+      style="--orbit:190px;--speed:16s;--planet:#e7a078"></div>
+  </div>
+
+  <div class="nsp-planet-grid">
+    <button type="button" data-planet="Mercury">☿ Mercury</button>
+    <button type="button" data-planet="Venus">♀ Venus</button>
+    <button type="button" data-planet="Earth">🌍 Earth</button>
+    <button type="button" data-planet="Mars">♂ Mars</button>
+    <button type="button" data-planet="Jupiter">♃ Jupiter</button>
+    <button type="button" data-planet="Saturn">🪐 Saturn</button>
+    <button type="button" data-planet="Uranus">♅ Uranus</button>
+    <button type="button" data-planet="Neptune">♆ Neptune</button>
+  </div>
+
+  <div class="nsp-panel" id="nspPlanetInfo" aria-live="polite">
+    Choose a planet to begin your exploration.
+  </div>
+
+  <p class="nsp-muted">
+    Want a real-data 3D experience?
+    <a href="https://science.nasa.gov/eyes/"
+       target="_blank" rel="noopener noreferrer">
+      Explore NASA's Eyes
+    </a>.
+  </p>
+</section>
+
+<!-- 2. NATUSPAC EARTH INTELLIGENCE -->
+<section id="earth-intelligence" class="nsp-module">
+  <div class="nsp-stat">02 / HOME PLANET</div>
+  <h2>Earth Intelligence</h2>
+  <p class="nsp-muted">
+    Explore facts about our planet and open real Earth-observation
+    resources from NASA.
+  </p>
+
+  <div class="nsp-buttons">
+    <button type="button" data-earth="overview">Earth overview</button>
+    <button type="button" data-earth="atmosphere">Atmosphere</button>
+    <button type="button" data-earth="water">Oceans and water</button>
+    <button type="button" data-earth="climate">Climate</button>
+    <button type="button" data-earth="satellites">Satellites</button>
+  </div>
+
+  <div class="nsp-panel" id="nspEarthInfo" aria-live="polite">
+    Select a topic to explore Earth.
+  </div>
+
+  <div class="nsp-buttons">
+    <a href="https://science.nasa.gov/eyes/"
+       target="_blank" rel="noopener noreferrer">
+      Explore NASA Earth tools ↗
+    </a>
+    <a href="https://earthobservatory.nasa.gov/"
+       target="_blank" rel="noopener noreferrer">
+      NASA Earth Observatory ↗
+    </a>
+  </div>
+
+  <p class="nsp-muted">
+    The information panel contains educational facts.
+    The external NASA resources provide additional imagery and data.
+  </p>
+</section>
+
+<!-- 3. NATUSPAC PHYSICS PLAYGROUND -->
+<section id="physics-playground" class="nsp-module">
+  <div class="nsp-stat">03 / EXPERIMENTAL PHYSICS</div>
+  <h2>Physics Playground</h2>
+  <p class="nsp-muted">
+    Switch between three animated demonstrations.
+    These are simplified educational models, not precision simulations.
+  </p>
+
+  <div class="nsp-buttons">
+    <button type="button" data-physics="gravity">Gravity</button>
+    <button type="button" data-physics="orbit">Orbital motion</button>
+    <button type="button" data-physics="wave">Wave motion</button>
+  </div>
+
+  <canvas
+    class="nsp-canvas"
+    id="nspPhysicsCanvas"
+    role="img"
+    aria-label="Animated physics demonstration"
+  ></canvas>
+
+  <div class="nsp-panel" id="nspPhysicsInfo" aria-live="polite">
+    Select a demonstration to begin.
+  </div>
+
+  <button type="button" id="nspPhysicsPause">
+    Pause animation
+  </button>
+</section>
     <section id="contact">
         
-      <div class="section-label">03 / THE NEXT CHAPTER</div>
+      <div class="section-label">/ THE NEXT CHAPTER</div>
       <h2>Every idea starts somewhere.</h2>
       <p class="intro">
         This space will grow as I learn, build, and discover.
@@ -993,6 +1260,210 @@ showPuzzle();
 
   resize();
   animationId = requestAnimationFrame(animate);
+})();
+
+/* NATUSPAC EXPLORATION ENGINE */
+(function () {
+  // SOLAR SYSTEM
+  const planetInfo = {
+    Mercury: "MERCURY\nThe smallest planet and the closest to the Sun.\nYear: about 88 Earth days.",
+    Venus: "VENUS\nA rocky planet with an extremely hot surface.\nYear: about 225 Earth days.",
+    Earth: "EARTH\nOur home planet, with stable surface liquid water and known life.\nYear: about 365.25 days.",
+    Mars: "MARS\nA cold, rocky world with a thin atmosphere.\nYear: about 687 Earth days.",
+    Jupiter: "JUPITER\nThe largest planet in our solar system. It is a gas giant.\nYear: about 11.86 Earth years.",
+    Saturn: "SATURN\nA gas giant famous for its extensive ring system.\nYear: about 29.4 Earth years.",
+    Uranus: "URANUS\nAn ice giant that rotates with an extreme axial tilt.\nYear: about 84 Earth years.",
+    Neptune: "NEPTUNE\nA distant ice giant with powerful winds.\nYear: about 165 Earth years."
+  };
+
+  const planetBox = document.getElementById("nspPlanetInfo");
+
+  document.querySelectorAll("[data-planet]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const name = button.dataset.planet;
+      if (planetBox) planetBox.textContent = planetInfo[name];
+    });
+  });
+
+  // EARTH INTELLIGENCE
+  const earthInfo = {
+    overview:
+      "EARTH OVERVIEW\nEarth is approximately 4.54 billion years old.\nIts surface includes continents, oceans, ice and many ecosystems.",
+
+    atmosphere:
+      "ATMOSPHERE\nEarth's atmosphere is mostly nitrogen and oxygen.\nIt helps regulate temperature and protects life from many hazards.",
+
+    water:
+      "OCEANS AND WATER\nAbout 71% of Earth's surface is covered by water.\nMost of Earth's water is in the oceans.",
+
+    climate:
+      "CLIMATE\nClimate describes long-term weather patterns.\nScientists study temperature, rainfall, ice, oceans and other indicators to understand change.",
+
+    satellites:
+      "EARTH-OBSERVING SATELLITES\nSatellites help scientists observe clouds, vegetation, oceans, land and atmospheric conditions.\nMeasurements depend on the instrument and mission."
+  };
+
+  const earthBox = document.getElementById("nspEarthInfo");
+
+  document.querySelectorAll("[data-earth]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      const topic = button.dataset.earth;
+      if (earthBox) earthBox.textContent = earthInfo[topic];
+    });
+  });
+
+  // PHYSICS PLAYGROUND
+  const canvas = document.getElementById("nspPhysicsCanvas");
+  const info = document.getElementById("nspPhysicsInfo");
+  const pauseButton = document.getElementById("nspPhysicsPause");
+
+  if (!canvas || !info || !pauseButton) return;
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    info.textContent = "Canvas is not supported in this browser.";
+    return;
+  }
+
+  let mode = "gravity";
+  let paused = false;
+  let startTime = performance.now();
+  let frame = 0;
+  let width = 0;
+  let height = 0;
+  let ratio = 1;
+
+  const explanations = {
+    gravity:
+      "GRAVITY\nGravity attracts objects with mass. This illustration shows a ball falling and bouncing; it is not a precise physical model.",
+
+    orbit:
+      "ORBITAL MOTION\nAn orbit occurs when an object's forward motion and gravity combine to produce a curved path. This circular illustration is simplified.",
+
+    wave:
+      "WAVE MOTION\nWaves transfer energy. The moving curve represents a simple repeating wave; it does not represent a particular measured wave."
+  };
+
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+
+    width = rect.width;
+    height = rect.height;
+    ratio = Math.min(window.devicePixelRatio || 1, 2);
+
+    canvas.width = Math.round(width * ratio);
+    canvas.height = Math.round(height * ratio);
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    draw(performance.now());
+  }
+
+  function draw(time) {
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = "#030711";
+    ctx.fillRect(0, 0, width, height);
+
+    const t = (time - startTime) / 1000;
+    const cx = width / 2;
+    const cy = height / 2;
+
+    ctx.strokeStyle = "#1c3a55";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, cy);
+    ctx.lineTo(width, cy);
+    ctx.stroke();
+
+    if (mode === "gravity") {
+      const travel = Math.max(35, height - 75);
+      const y = 25 + Math.abs(Math.sin(t * 1.6)) * travel;
+
+      ctx.beginPath();
+      ctx.arc(cx, y, 12, 0, Math.PI * 2);
+      ctx.fillStyle = "#8eeeff";
+      ctx.shadowColor = "#00cfff";
+      ctx.shadowBlur = 16;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      ctx.fillStyle = "#8ba5b7";
+      ctx.font = "12px monospace";
+      ctx.fillText("GRAVITY MODEL", 12, 22);
+
+    } else if (mode === "orbit") {
+      const radius = Math.min(width, height) * 0.32;
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+      ctx.strokeStyle = "#42627d";
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, 12, 0, Math.PI * 2);
+      ctx.fillStyle = "#ffca62";
+      ctx.shadowColor = "#ffb347";
+      ctx.shadowBlur = 16;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      const angle = t * 1.2;
+      const x = cx + Math.cos(angle) * radius;
+      const y = cy + Math.sin(angle) * radius;
+
+      ctx.beginPath();
+      ctx.arc(x, y, 7, 0, Math.PI * 2);
+      ctx.fillStyle = "#8eeeff";
+      ctx.fill();
+
+    } else if (mode === "wave") {
+      ctx.beginPath();
+
+      for (let x = 0; x <= width; x += 2) {
+        const y = cy +
+          Math.sin(x * 0.035 - t * 3) * height * 0.23;
+
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+
+      ctx.strokeStyle = "#8eeeff";
+      ctx.lineWidth = 2;
+      ctx.shadowColor = "#00cfff";
+      ctx.shadowBlur = 8;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+    }
+
+    frame = requestAnimationFrame(draw);
+  }
+
+  document.querySelectorAll("[data-physics]").forEach(function (button) {
+    button.addEventListener("click", function () {
+      mode = button.dataset.physics;
+      info.textContent = explanations[mode];
+      startTime = performance.now();
+      draw(performance.now());
+    });
+  });
+
+  pauseButton.addEventListener("click", function () {
+    paused = !paused;
+
+    if (paused) {
+      cancelAnimationFrame(frame);
+      pauseButton.textContent = "Resume animation";
+    } else {
+      startTime = performance.now();
+      pauseButton.textContent = "Pause animation";
+      frame = requestAnimationFrame(draw);
+    }
+  });
+
+  window.addEventListener("resize", resize);
+
+  info.textContent = explanations[mode];
+  resize();
+  frame = requestAnimationFrame(draw);
 })();
 </script>
 </body>
