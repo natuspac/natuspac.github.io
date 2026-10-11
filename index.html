@@ -300,6 +300,50 @@ body {
     </section>
 
     <section id="contact">
+    
+<section class="terminal-section" id="terminal">
+  <div class="section-label">03 / SYSTEM INTERFACE</div>
+  <h2>Enter the Natuspac terminal.</h2>
+  <p class="intro">
+    A small interactive console for the curious.
+    Type a command to explore.
+  </p>
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="terminal-dot"></span>
+      <span class="terminal-dot"></span>
+      <span class="terminal-dot"></span>
+      <span class="terminal-name">NATUSPAC // CONSOLE</span>
+    </div>
+
+    <div class="terminal-screen">
+      <div id="terminalOutput" class="terminal-output" aria-live="polite"><span class="system">NATUSPAC CONSOLE v1.0
+Local interface ready.
+Type help to see available commands.</span></div>
+
+      <form class="terminal-form" id="terminalForm">
+        <label class="terminal-prompt" for="terminalInput">guest@natuspac:~$</label>
+        <input
+          class="terminal-input"
+          id="terminalInput"
+          type="text"
+          placeholder="type a command..."
+          autocomplete="off"
+          autocapitalize="none"
+          spellcheck="false"
+          maxlength="80"
+          aria-label="Terminal command"
+        >
+      </form>
+
+      <div class="terminal-hint">
+        TRY: help · about · projects · clear
+      </div>
+    </div>
+  </div>
+</section>
+        
       <div class="section-label">03 / THE NEXT CHAPTER</div>
       <h2>Every idea starts somewhere.</h2>
       <p class="intro">
