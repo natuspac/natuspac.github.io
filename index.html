@@ -298,9 +298,6 @@ body {
         This website is a living record of that journey.
       </p>
     </section>
-
-    <section id="contact">
-    
 <section class="terminal-section" id="terminal">
   <div class="section-label">03 / SYSTEM INTERFACE</div>
   <h2>Enter the Natuspac terminal.</h2>
@@ -343,6 +340,7 @@ Type help to see available commands.</span></div>
     </div>
   </div>
 </section>
+    <section id="contact">
         
       <div class="section-label">03 / THE NEXT CHAPTER</div>
       <h2>Every idea starts somewhere.</h2>
@@ -370,6 +368,86 @@ document.getElementById("year").textContent =
 document.getElementById("topButton").addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
+
+const terminalForm = document.getElementById("terminalForm");
+const terminalInput = document.getElementById("terminalInput");
+const terminalOutput = document.getElementById("terminalOutput");
+
+if (terminalForm && terminalInput && terminalOutput) {
+  const welcome = terminalOutput.innerHTML;
+
+  function runCommand(raw) {
+    const command = raw.trim().toLowerCase();
+    const responses = {
+      help: [
+        "AVAILABLE COMMANDS",
+        "help      - Show available commands",
+        "about     - About Natuspac",
+        "projects  - Explore our interests",
+        "clear     - Clear the console",
+        "date      - Show today's date",
+        "status    - Show interface status"
+      ].join("\n"),
+
+      about:
+        "NATUSPAC is a space for intelligence, technology, exploration, and ideas.",
+
+      projects:
+        "EXPLORATION AREAS\n" +
+        "01 / Digital engineering\n" +
+        "02 / Intelligence and insight\n" +
+        "03 / Research and discovery\n" +
+        "04 / Ideas into innovation\n\n" +
+        "More projects can be added as they develop.",
+
+      date: "LOCAL DATE: " + new Date().toLocaleDateString(),
+
+      status:
+        "INTERFACE: ONLINE\n" +
+        "CONSOLE: READY\n" +
+        "MODE: LOCAL DEMO\n" +
+        "NETWORK ACCESS: NOT USED",
+
+      clear: ""
+    };
+
+    if (command === "clear") {
+      terminalOutput.textContent = "";
+      return;
+    }
+
+    const result = Object.prototype.hasOwnProperty.call(
+      responses, command
+    )
+      ? responses[command]
+      : "Command not found: " + command +
+        "\nType help to see available commands.";
+
+    const line = document.createElement("div");
+    line.textContent = "guest@natuspac:~$ " + raw;
+    line.style.color = "#8ba5b7";
+
+    const output = document.createElement("div");
+    output.textContent = result;
+    output.className = Object.prototype.hasOwnProperty.call(
+      responses, command
+    ) ? "system" : "error";
+
+    terminalOutput.append(line, output);
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+  }
+
+  terminalForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const raw = terminalInput.value.slice(0, 80);
+    if (!raw.trim()) return;
+
+    runCommand(raw);
+    terminalInput.value = "";
+    terminalInput.focus();
+  });
+}
 </script>
 </body>
 </html>
