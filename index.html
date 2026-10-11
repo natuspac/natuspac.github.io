@@ -95,6 +95,46 @@ footer {
   .grid { grid-template-columns: 1fr; }
   footer { flex-direction: column; }
 }
+
+/* NATUSPAC futuristic effects */
+body {
+  background:
+    radial-gradient(ellipse at 80% 5%,
+      #08243b 0%, transparent 38%),
+    #050810;
+}
+
+.logo {
+  color: var(--accent);
+  text-shadow: 0 0 14px #00f5ff70;
+}
+
+.status {
+  text-shadow: 0 0 12px #00f5ff90;
+}
+
+.btn.primary {
+  box-shadow: 0 0 20px #00f5ff25;
+  transition: box-shadow .25s, transform .25s;
+}
+
+.btn.primary:hover {
+  box-shadow: 0 0 28px #00f5ff70;
+  transform: translateY(-2px);
+}
+
+.card {
+  box-shadow: inset 0 0 24px #00f5ff05;
+}
+
+.card:hover {
+  box-shadow: 0 0 22px #00f5ff15;
+}
+
+::selection {
+  background: #00f5ff;
+  color: #050810;
+}
 </style>
 </head>
 <body>
