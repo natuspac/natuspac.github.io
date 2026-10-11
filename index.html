@@ -237,6 +237,55 @@ body {
     font-size: 12px;
   }
 }
+
+/* NATUSPAC THOUGHT LAB */
+.lab {
+  margin: 25px 0 45px;
+  padding: 22px;
+  border: 1px solid #174858;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #0b1420, #050810);
+  box-shadow: 0 0 25px #00f5ff0c;
+}
+.lab h3 {
+  color: #00f5ff;
+  margin-top: 0;
+}
+.lab p, .lab small {
+  color: #93a8bc;
+}
+.lab button {
+  border: 1px solid #00bccc;
+  border-radius: 7px;
+  background: #071922;
+  color: #00f5ff;
+  padding: 10px 14px;
+  margin: 5px 4px 5px 0;
+  cursor: pointer;
+}
+.lab button:focus-visible,
+.lab input:focus-visible {
+  outline: 2px solid #00f5ff;
+  outline-offset: 3px;
+}
+.lab input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #174858;
+  border-radius: 7px;
+  background: #050810;
+  color: #edfaff;
+  font: inherit;
+}
+.lab-result {
+  margin-top: 14px;
+  padding: 12px;
+  border-left: 2px solid #00f5ff;
+  color: #edfaff;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 </style>
 </head>
 <body>
@@ -338,6 +387,61 @@ Type help to see available commands.</span></div>
         TRY: help · about · projects · clear
       </div>
     </div>
+  </div>
+</section>
+
+<section id="thought-lab">
+  <div class="section-label">04 / INTERACTIVE LAB</div>
+  <h2>Explore the unknown.</h2>
+  <p class="intro">
+    Question assumptions. Discover ideas. Challenge your mind.
+  </p>
+
+  <div class="lab">
+    <h3>01 / Question of the day</h3>
+    <p id="labQuestion">
+      Is it more important to know the right answer
+      or to ask the right question?
+    </p>
+    <input id="labAnswer"
+      type="text" maxlength="300"
+      placeholder="Write your own perspective..."
+      aria-label="Your perspective">
+    <button type="button" id="submitThought">
+      Submit thought
+    </button>
+    <div class="lab-result" id="thoughtResult"
+      aria-live="polite">Your ideas start here.</div>
+    <small>Your answer stays in this page; it is not published.</small>
+  </div>
+
+  <div class="lab">
+    <h3>02 / Idea generator</h3>
+    <p>Need something interesting to think about or create?</p>
+    <button type="button" id="generateIdea">
+      Generate an idea ↗
+    </button>
+    <div class="lab-result" id="ideaResult" aria-live="polite">
+      Your next idea is waiting.
+    </div>
+  </div>
+
+  <div class="lab">
+    <h3>03 / Logic challenge</h3>
+    <p id="logicQuestion">
+      What comes next: 2, 4, 8, 16, ?
+    </p>
+    <div id="logicOptions">
+      <button type="button" data-answer="24">24</button>
+      <button type="button" data-answer="32">32</button>
+      <button type="button" data-answer="30">30</button>
+      <button type="button" data-answer="18">18</button>
+    </div>
+    <div class="lab-result" id="logicResult"
+      aria-live="polite">Choose your answer.</div>
+    <button type="button" id="nextPuzzle">
+      Next challenge ↻
+    </button>
   </div>
 </section>
     <section id="contact">
@@ -448,6 +552,106 @@ if (terminalForm && terminalInput && terminalOutput) {
     terminalInput.focus();
   });
 }
+
+/* NATUSPAC THOUGHT LAB */
+
+const thoughtBox = document.getElementById("labAnswer");
+const thoughtResult = document.getElementById("thoughtResult");
+
+document.getElementById("submitThought").addEventListener("click", () => {
+  const answer = thoughtBox.value.trim();
+
+  thoughtResult.textContent = answer
+    ? "Thought received.\n\n" + answer +
+      "\n\nReflection: What would change your perspective?"
+    : "Write a thought first, then submit it.";
+});
+
+const ideas = [
+  "Design an app that helps people learn one new concept every day.",
+  "Imagine a city powered entirely by renewable energy. How would it work?",
+  "Create a website that explains difficult scientific ideas simply.",
+  "Investigate a common belief and discover what evidence supports it.",
+  "Design a tool that helps people reduce unnecessary screen time.",
+  "Imagine how humans might communicate with a future AI system.",
+  "Create a visual guide to the scale of the known universe.",
+  "Invent a new way to make learning more interactive."
+];
+
+document.getElementById("generateIdea").addEventListener("click", () => {
+  const idea = ideas[Math.floor(Math.random() * ideas.length)];
+  document.getElementById("ideaResult").textContent = idea;
+});
+
+const puzzles = [
+  {
+    question: "What comes next: 2, 4, 8, 16, ?",
+    options: ["24", "32", "30", "18"],
+    answer: "32",
+    explanation: "Each number is doubled."
+  },
+  {
+    question: "What comes next: 1, 4, 9, 16, ?",
+    options: ["20", "24", "25", "36"],
+    answer: "25",
+    explanation: "These are squares: 1², 2², 3², 4², 5²."
+  },
+  {
+    question: "What comes next: 3, 6, 11, 18, ?",
+    options: ["25", "27", "29", "24"],
+    answer: "27",
+    explanation: "The increments are +3, +5, +7, then +9."
+  }
+];
+
+let puzzleIndex = 0;
+let puzzleSolved = false;
+
+function showPuzzle() {
+  const puzzle = puzzles[puzzleIndex];
+
+  document.getElementById("logicQuestion").textContent =
+    puzzle.question;
+
+  document.getElementById("logicResult").textContent =
+    "Choose your answer.";
+
+  puzzleSolved = false;
+
+  const optionsBox = document.getElementById("logicOptions");
+  optionsBox.replaceChildren();
+
+  puzzle.options.forEach(option => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = option;
+
+    button.addEventListener("click", () => {
+      if (puzzleSolved) return;
+
+      puzzleSolved = true;
+
+      document.getElementById("logicResult").textContent =
+        option === puzzle.answer
+          ? "Correct! " + puzzle.explanation
+          : "Not quite. " + puzzle.explanation +
+            " The answer is " + puzzle.answer + ".";
+
+      optionsBox.querySelectorAll("button").forEach(b => {
+        b.disabled = true;
+      });
+    });
+
+    optionsBox.appendChild(button);
+  });
+}
+
+document.getElementById("nextPuzzle").addEventListener("click", () => {
+  puzzleIndex = (puzzleIndex + 1) % puzzles.length;
+  showPuzzle();
+});
+
+showPuzzle();
 </script>
 </body>
 </html>
