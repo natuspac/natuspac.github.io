@@ -500,7 +500,208 @@ body {
   .nsp-orbit {
     animation: none;
   }
-}    
+}  
+
+/* NATUSPAC PREMIUM COMMAND CENTRE */
+.nsp-command {
+  --nsp-cyan: #79edff;
+  --nsp-muted: #8ca5bd;
+  position: relative;
+  margin: 34px 0;
+  padding: clamp(18px, 5vw, 36px);
+  overflow: hidden;
+  color: #edf8ff;
+  background:
+    radial-gradient(ellipse at 100% 0%, #12304b88, transparent 48%),
+    linear-gradient(145deg, #080f1d, #03060d 75%);
+  border: 1px solid #24425b;
+  border-radius: 20px;
+  box-shadow: 0 18px 55px #00000025;
+  scroll-margin-top: 80px;
+}
+
+.nsp-command::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 8%;
+  width: 84%;
+  height: 1px;
+  background: linear-gradient(
+    90deg, transparent, #79edff88, transparent
+  );
+}
+
+.nsp-command-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.nsp-eyebrow,
+.nsp-live,
+.nsp-card-index,
+.nsp-command-footer {
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+.nsp-eyebrow {
+  color: var(--nsp-cyan);
+}
+
+.nsp-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #8ce5b6;
+}
+
+.nsp-live-dot {
+  width: 6px;
+  height: 6px;
+  background: #64e8a1;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #64e8a1;
+}
+
+.nsp-command-title {
+  margin: 32px 0 14px;
+  font-size: clamp(30px, 6vw, 48px);
+  line-height: 1.12;
+  letter-spacing: -1.4px;
+}
+
+.nsp-command-title span {
+  color: var(--nsp-cyan);
+}
+
+.nsp-command-intro {
+  max-width: 440px;
+  margin-bottom: 28px;
+  color: var(--nsp-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.nsp-command-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+
+.nsp-command-card {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 145px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 15px;
+  color: #edf8ff;
+  text-decoration: none;
+  background: linear-gradient(145deg, #101e30, #080e19);
+  border: 1px solid #21364d;
+  border-radius: 13px;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+  scroll-margin-top: 80px;
+}
+
+.nsp-command-card:hover {
+  transform: translateY(-3px);
+  border-color: #79edff99;
+  background: linear-gradient(145deg, #142a40, #091321);
+}
+
+.nsp-command-card:active {
+  transform: scale(0.985);
+}
+
+.nsp-command-card:focus-visible {
+  outline: 2px solid var(--nsp-cyan);
+  outline-offset: 3px;
+}
+
+.nsp-card-index {
+  color: #7590a9;
+}
+
+.nsp-card-icon {
+  color: var(--nsp-cyan);
+  font-size: 23px;
+  line-height: 1;
+}
+
+.nsp-card-name {
+  padding-right: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.nsp-card-desc {
+  color: var(--nsp-muted);
+  font-size: 11px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.nsp-card-arrow {
+  position: absolute;
+  top: 13px;
+  right: 13px;
+  color: var(--nsp-cyan);
+  font-size: 16px;
+}
+
+.nsp-featured {
+  background:
+    radial-gradient(ellipse at 100% 0%, #17475b66, transparent 65%),
+    #0b1827;
+}
+
+.nsp-contact-card {
+  border-color: #27526b;
+}
+
+.nsp-command-footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 18px;
+  color: #718ba3;
+  border-top: 1px solid #203248;
+  line-height: 1.7;
+}
+
+@media (max-width: 360px) {
+  .nsp-command-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nsp-command-card {
+    min-height: 125px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nsp-command-card {
+    transition: none;
+  }
+
+  .nsp-command-card:hover {
+    transform: none;
+  }
+}
 </style>
 </head>
 <body>
@@ -525,6 +726,115 @@ body {
       </div>
     </header>
 
+<!-- NATUSPAC COMMAND CENTRE -->
+<section id="contents" class="nsp-command">
+  <div class="nsp-command-top">
+    <span class="nsp-eyebrow">NATUSPAC / NAVIGATION SYSTEM</span>
+    <span class="nsp-live">
+      <span class="nsp-live-dot"></span>
+      SYSTEM ONLINE
+    </span>
+  </div>
+
+  <h2 class="nsp-command-title">
+    One space.<br />
+    <span>Infinite directions.</span>
+  </h2>
+
+  <p class="nsp-command-intro">
+    Your gateway to intelligence, exploration and discovery.
+    Select a destination to continue.
+  </p>
+
+  <div class="nsp-command-grid">
+
+    <a class="nsp-command-card nsp-featured" href="#hero">
+      <span class="nsp-card-index">00 / START</span>
+      <span class="nsp-card-icon">⌂</span>
+      <span class="nsp-card-name">Home Base</span>
+      <span class="nsp-card-desc">Return to the beginning</span>
+      <span class="nsp-card-arrow">↗</span>
+    </a>
+
+    <a class="nsp-command-card" href="#projects">
+      <span class="nsp-card-index">01 / WORK</span>
+      <span class="nsp-card-icon">◇</span>
+      <span class="nsp-card-name">Projects</span>
+      <span class="nsp-card-desc">Ideas and innovation</span>
+      <span class="nsp-card-arrow">↗</span>
+    </a>
+
+    <a class="nsp-command-card" href="#about">
+      <span class="nsp-card-index">02 / IDENTITY</span>
+      <span class="nsp-card-icon">◎</span>
+      <span class="nsp-card-name">About Natuspac</span>
+      <span class="nsp-card-desc">Purpose and vision</span>
+      <span class="nsp-card-arrow">↗</span>
+    </a>
+
+    <a class="nsp-command-card" href="#terminal">
+      <span class="nsp-card-index">03 / COMMAND</span>
+      <span class="nsp-card-icon">⌘</span>
+      <span class="nsp-card-name">Smart Terminal</span>
+      <span class="nsp-card-desc">Enter your commands</span>
+      <span class="nsp-card-arrow">↗</span>
+    </a>
+
+    <a class="nsp-command-card" href="#thought-lab">
+      <span class="nsp-card-index">04 / THINK</span>
+      <span class="nsp-card-icon">✳</span>
+      <span class="nsp-card-name">Thought Lab</span>
+      <span class="nsp-card-desc">Question and discover</span>
+      <span class="nsp-card-arrow">↗</span>
+    </a>
+
+    <a class="nsp-command-card" href="#cosmic-explorer">
+      <span class="nsp-card-index">05 / COSMOS</span>
+      <span class="nsp-card-icon">✧</span>
+      <span class="nsp-card-name">Cosmic Explorer</span>
+      <span class="nsp-card-desc">Explore the starfield</span>
+      <span class="nsp-card-arrow">↗</span>
+    </a>
+
+    <a class="nsp-command-card" href="#solar-system">
+      <span class="nsp-card-index">06 / PLANETS</span>
+      <span class="nsp-card-icon">◉</span>
+      <span class="nsp-card-name">Solar System</span>
+      <span class="nsp-card-desc">Discover the planets</span>
+      <span class="nsp-card-arrow">↗</span>
+    </a>
+
+    <a class="nsp-command-card" href="#earth-intelligence">
+      <span class="nsp-card-index">07 / EARTH</span>
+      <span class="nsp-card-icon">⊕</span>
+      <span class="nsp-card-name">Earth Intelligence</span>
+      <span class="nsp-card-desc">Explore our home planet</span>
+      <span class="nsp-card-arrow">↗</span>
+    </a>
+
+    <a class="nsp-command-card" href="#physics-playground">
+      <span class="nsp-card-index">08 / PHYSICS</span>
+      <span class="nsp-card-icon">∿</span>
+      <span class="nsp-card-name">Physics Playground</span>
+      <span class="nsp-card-desc">Experiment with science</span>
+      <span class="nsp-card-arrow">↗</span>
+    </a>
+
+    <a class="nsp-command-card nsp-contact-card" href="#contact">
+      <span class="nsp-card-index">09 / CONNECT</span>
+      <span class="nsp-card-icon">↗</span>
+      <span class="nsp-card-name">Contact</span>
+      <span class="nsp-card-desc">Connect with Natuspac</span>
+      <span class="nsp-card-arrow">↗</span>
+    </a>
+
+  </div>
+
+  <div class="nsp-command-footer">
+    <span>NATUSPAC INTELLIGENCE ORGANISATION</span>
+    <span>EXPLORE WITH PURPOSE ↗</span>
+  </div>
+</section>
     <section id="projects">
       <div class="section-label">01 / SELECTED INTERESTS</div>
       <h2>Things I'm exploring.</h2>
