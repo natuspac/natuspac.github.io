@@ -7,7 +7,105 @@
 <meta name="theme-color" content="#080a0e">
 <meta name="description" content="A digital space for ideas, technology, and exploration.">
 <title>Natuspac | Intelligence & Innovation</title>
+.terminal-section {
+  padding: 35px 0 65px;
 }
+
+.terminal {
+  overflow: hidden;
+  border: 1px solid #174858;
+  border-radius: 12px;
+  background: #050a12;
+  box-shadow: 0 0 30px #00f5ff0c;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 13px 15px;
+  border-bottom: 1px solid #173344;
+  background: #0b1420;
+}
+
+.terminal-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #294858;
+}
+
+.terminal-name {
+  margin-left: 7px;
+  color: #8bb9c7;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+}
+
+.terminal-screen {
+  padding: 18px;
+  color: #c4e6ef;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.terminal-output {
+  min-height: 100px;
+  max-height: 240px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.terminal-output .system {
+  color: #00f5ff;
+}
+
+.terminal-output .error {
+  color: #ff9aab;
+}
+
+.terminal-form {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 12px;
+  border-top: 1px solid #173344;
+  padding-top: 14px;
+}
+
+.terminal-prompt {
+  color: #00f5ff;
+  white-space: nowrap;
+}
+
+.terminal-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: #f1fdff;
+  font: inherit;
+  caret-color: #00f5ff;
+}
+
+.terminal-input:focus-visible {
+  box-shadow: 0 1px #00f5ff;
+}
+
+.terminal-hint {
+  color: #7795a5;
+  font-size: 11px;
+  margin-top: 12px;
+}
+
+@media (max-width: 560px) {
+  .terminal-screen {
+    padding: 13px;
+    font-size: 12px;
+  }
 <style>
 :root {
     --bg: #050810;
@@ -138,105 +236,6 @@ body {
 }
 
 /* NATUSPAC interactive terminal */
-.terminal-section {
-  padding: 35px 0 65px;
-}
-
-.terminal {
-  overflow: hidden;
-  border: 1px solid #174858;
-  border-radius: 12px;
-  background: #050a12;
-  box-shadow: 0 0 30px #00f5ff0c;
-  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-}
-
-.terminal-bar {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 13px 15px;
-  border-bottom: 1px solid #173344;
-  background: #0b1420;
-}
-
-.terminal-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #294858;
-}
-
-.terminal-name {
-  margin-left: 7px;
-  color: #8bb9c7;
-  font-size: 11px;
-  letter-spacing: 1.5px;
-}
-
-.terminal-screen {
-  padding: 18px;
-  color: #c4e6ef;
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-.terminal-output {
-  min-height: 100px;
-  max-height: 240px;
-  overflow-y: auto;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-.terminal-output .system {
-  color: #00f5ff;
-}
-
-.terminal-output .error {
-  color: #ff9aab;
-}
-
-.terminal-form {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-top: 12px;
-  border-top: 1px solid #173344;
-  padding-top: 14px;
-}
-
-.terminal-prompt {
-  color: #00f5ff;
-  white-space: nowrap;
-}
-
-.terminal-input {
-  flex: 1;
-  min-width: 0;
-  background: transparent;
-  border: 0;
-  outline: none;
-  color: #f1fdff;
-  font: inherit;
-  caret-color: #00f5ff;
-}
-
-.terminal-input:focus-visible {
-  box-shadow: 0 1px #00f5ff;
-}
-
-.terminal-hint {
-  color: #7795a5;
-  font-size: 11px;
-  margin-top: 12px;
-}
-
-@media (max-width: 560px) {
-  .terminal-screen {
-    padding: 13px;
-    font-size: 12px;
-  }
 }
 </style>
 </head>
