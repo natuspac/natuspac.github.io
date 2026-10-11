@@ -286,6 +286,68 @@ body {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
+
+/* NATUSPAC COSMIC EXPLORER */
+.cosmos {
+  position: relative;
+  overflow: hidden;
+  padding: 22px;
+  border: 1px solid #173d5b;
+  border-radius: 16px;
+  background:
+    radial-gradient(ellipse at 50% 100%, #102c50, transparent 65%),
+    #030611;
+  box-shadow: 0 0 30px #387bff12;
+}
+
+.cosmos-heading {
+  color: #8eeeff;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.cosmos canvas {
+  display: block;
+  width: 100%;
+  height: 310px;
+  margin-top: 12px;
+  border-radius: 10px;
+  touch-action: manipulation;
+  cursor: crosshair;
+}
+
+.cosmos-instruction {
+  color: #92a9c5;
+  font-size: 12px;
+  margin: 12px 0;
+}
+
+.cosmos-fact {
+  min-height: 76px;
+  padding: 14px;
+  border: 1px solid #16465c;
+  border-radius: 9px;
+  background: #06101e;
+  color: #d9f7ff;
+  font-size: 14px;
+  white-space: pre-wrap;
+}
+
+.cosmos button {
+  margin-top: 12px;
+  padding: 11px 15px;
+  border: 1px solid #00d9ff;
+  border-radius: 7px;
+  background: #071b2c;
+  color: #7deeff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.cosmos button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
 </style>
 </head>
 <body>
@@ -444,6 +506,45 @@ Type help to see available commands.</span></div>
     </button>
   </div>
 </section>
+
+<section id="cosmic-explorer">
+  <div class="section-label">05 / COSMIC INTELLIGENCE</div>
+  <h2>Explore the universe.</h2>
+  <p class="intro">
+    Every star tells a story. Choose one and begin exploring.
+  </p>
+
+  <div class="cosmos">
+    <div class="cosmos-heading">
+      NATUSPAC / DEEP SPACE OBSERVATORY
+    </div>
+
+    <canvas
+      id="cosmicCanvas"
+      aria-label="Interactive starfield. Tap or click a star to explore it."
+      role="img"
+    ></canvas>
+
+    <p class="cosmos-instruction">
+      TAP OR CLICK A STAR TO DISCOVER A COSMIC FACT.
+    </p>
+
+    <div class="cosmos-fact"
+      id="cosmicFact"
+      aria-live="polite">
+      Observatory ready.
+      Select any star in the field to begin.
+    </div>
+
+    <button type="button" id="cosmicRandom">
+      Discover a random star ↗
+    </button>
+
+    <button type="button" id="cosmicReset">
+      Reset starfield ↻
+    </button>
+  </div>
+</section>
     <section id="contact">
         
       <div class="section-label">03 / THE NEXT CHAPTER</div>
@@ -482,16 +583,17 @@ if (terminalForm && terminalInput && terminalOutput) {
 
   function runCommand(raw) {
     const command = raw.trim().toLowerCase();
+    
+    if (command === "cosmic") {
+      document.getElementById("cosmic-explorer")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }
+
+    if (command === "help") {
+      // The existing help response remains unchanged.
+    }
     const responses = {
-      help: [
-        "AVAILABLE COMMANDS",
-        "help      - Show available commands",
-        "about     - About Natuspac",
-        "projects  - Explore our interests",
-        "clear     - Clear the console",
-        "date      - Show today's date",
-        "status    - Show interface status"
-      ].join("\n"),
+      
 
       about:
         "NATUSPAC is a space for intelligence, technology, exploration, and ideas.",
@@ -505,7 +607,28 @@ if (terminalForm && terminalInput && terminalOutput) {
         "More projects can be added as they develop.",
 
       date: "LOCAL DATE: " + new Date().toLocaleDateString(),
-
+      
+      help: [
+        "NATUSPAC COMMAND DIRECTORY",
+        "help      - Show commands",
+        "about     - About Natuspac",
+        "projects  - Explore projects",
+        "whoami    - Identify this session",
+        "motto     - Display our philosophy",
+        "universe  - Discover a cosmic fact",
+        "cosmic    - Open the Cosmic Explorer",
+        "explore   - Show exploration options",
+        "riddle    - Try a thinking puzzle",
+        "reveal    - Find a hidden message",
+        "version   - Console information",
+        "ping      - Test the local interface",
+        "date      - Show today's date",
+        "status    - Show interface status",
+        "clear     - Clear terminal output"
+      ].join("\n"),
+      cosmic:
+        "COSMIC EXPLORER ACTIVATED.\n" +
+        "Scroll to the starfield and tap a star to discover more.",  
       status:
         "INTERFACE: ONLINE\n" +
         "CONSOLE: READY\n" +
@@ -513,6 +636,47 @@ if (terminalForm && terminalInput && terminalOutput) {
         "NETWORK ACCESS: NOT USED",
 
       clear: ""
+    
+      whoami:
+        "VISITOR ID: GUEST\n" +
+        "SYSTEM: NATUSPAC DIGITAL SPACE\n" +
+        "MODE: EXPLORATION",
+
+      motto:
+        "QUESTION EVERYTHING.\n" +
+        "INVESTIGATE DEEPLY.\n" +
+        "BUILD WHAT MATTERS.",
+
+      universe:
+        "THE OBSERVABLE UNIVERSE IS ABOUT 93 BILLION LIGHT-YEARS ACROSS.\n" +
+        "Type cosmic to open the Cosmic Explorer.",
+
+      riddle:
+        "RIDDLE: I have no voice, yet I can tell a story.\n" +
+        "I have no mind, yet I preserve knowledge.\n" +
+        "What am I?\n" +
+        "Hint: You can read me.",
+
+      reveal:
+        "HIDDEN DIRECTIVE UNLOCKED:\n" +
+        "The most powerful tool is a curious mind.",
+
+      explore:
+        "EXPLORATION MENU\n" +
+        "cosmic  - Open the starfield\n" +
+        "riddle  - Solve a thinking puzzle\n" +
+        "universe - Discover a cosmic fact\n" +
+        "reveal  - Discover a hidden message\n" +
+        "motto   - Display the Natuspac philosophy",
+
+      version:
+        "NATUSPAC CONSOLE v2.0\n" +
+        "MODULE: INTERACTIVE DEMO\n" +
+        "STATUS: OPERATIONAL",
+
+      ping:
+        "LOCAL INTERFACE RESPONDS.\n" +
+        "This is a simulated ping, not a network test." 
     };
 
     if (command === "clear") {
@@ -652,6 +816,182 @@ document.getElementById("nextPuzzle").addEventListener("click", () => {
 });
 
 showPuzzle();
+
+/* NATUSPAC COSMIC EXPLORER ENGINE */
+(function () {
+  const canvas = document.getElementById("cosmicCanvas");
+  const factBox = document.getElementById("cosmicFact");
+  const randomButton = document.getElementById("cosmicRandom");
+  const resetButton = document.getElementById("cosmicReset");
+
+  if (!canvas || !factBox || !randomButton || !resetButton) return;
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) {
+    factBox.textContent = "Canvas is not supported in this browser.";
+    return;
+  }
+
+  const facts = [
+    "THE SUN\nOur Sun is a star at the centre of our solar system. Its light takes about 8 minutes 20 seconds to reach Earth.",
+    "PROXIMA CENTAURI\nThis red dwarf is the nearest known star to the Sun, about 4.24 light-years away.",
+    "SIRIUS\nSirius is the brightest star in Earth's night sky, apart from the Sun.",
+    "NEBULAE\nNebulae are vast clouds of gas and dust. Some are regions where new stars form.",
+    "NEUTRON STARS\nSome massive stars leave behind incredibly dense remnants after a supernova.",
+    "THE MILKY WAY\nOur solar system is in the Milky Way, a galaxy containing billions of stars.",
+    "LIGHT-YEARS\nA light-year measures distance: how far light travels in one year.",
+    "BLACK HOLES\nA black hole is a region where gravity is so strong that light cannot escape from within its event horizon.",
+    "EXOPLANETS\nExoplanets are planets orbiting stars beyond our solar system.",
+    "GALAXIES\nGalaxies contain stars, gas, dust, and dark matter held together by gravity."
+  ];
+
+  let stars = [];
+  let width = 0;
+  let height = 0;
+  let pixelRatio = 1;
+  let selected = -1;
+  let animationId = 0;
+
+  function makeStars() {
+    stars = [];
+    const count = Math.max(90, Math.min(220, Math.floor(width * height / 1700)));
+
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random(),
+        y: Math.random(),
+        r: Math.random() * 1.5 + 0.35,
+        phase: Math.random() * Math.PI * 2,
+        speed: Math.random() * 1.5 + 0.4
+      });
+    }
+
+    selected = -1;
+    factBox.textContent =
+      "Starfield initialized.\nTap a bright point to discover something about the universe.";
+  }
+
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+
+    width = rect.width;
+    height = rect.height;
+    pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+
+    canvas.width = Math.round(width * pixelRatio);
+    canvas.height = Math.round(height * pixelRatio);
+
+    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+    makeStars();
+    draw(performance.now());
+  }
+
+  function draw(time) {
+    ctx.clearRect(0, 0, width, height);
+
+    const glow = ctx.createRadialGradient(
+      width * 0.5, height * 0.48, 0,
+      width * 0.5, height * 0.48, width * 0.7
+    );
+
+    glow.addColorStop(0, "#102648");
+    glow.addColorStop(1, "#030611");
+
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, width, height);
+
+    stars.forEach((star, index) => {
+      const x = star.x * width;
+      const y = star.y * height;
+      const twinkle = 0.55 +
+        0.45 * Math.sin(time / 900 * star.speed + star.phase);
+      const radius = star.r * (index === selected ? 2.5 : 1);
+
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = index === selected
+        ? "#ffffff"
+        : "rgba(150,225,255," + twinkle + ")";
+      ctx.shadowBlur = index === selected ? 18 : 5;
+      ctx.shadowColor = "#43d9ff";
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      if (index === selected) {
+        ctx.beginPath();
+        ctx.arc(x, y, 10, 0, Math.PI * 2);
+        ctx.strokeStyle = "#64e8ff";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+    });
+
+    ctx.fillStyle = "#8eeeff";
+    ctx.font = "10px monospace";
+    ctx.fillText("SECTOR 01 // SIMULATED STARFIELD", 10, height - 12);
+  }
+
+  function animate(time) {
+    draw(time);
+    animationId = requestAnimationFrame(animate);
+  }
+
+  function discover(index) {
+    if (!stars.length) return;
+
+    selected = index;
+    const factIndex = Math.floor(Math.random() * facts.length);
+
+    factBox.textContent =
+      "OBSERVATION TARGET " + String(index + 1).padStart(3, "0") +
+      "\n\n" + facts[factIndex] +
+      "\n\nNote: Star positions are simulated, not a real astronomical map.";
+
+    draw(performance.now());
+  }
+
+  function pickStar(event) {
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    let nearest = -1;
+    let shortest = Infinity;
+
+    stars.forEach((star, index) => {
+      const dx = star.x * width - x;
+      const dy = star.y * height - y;
+      const distance = dx * dx + dy * dy;
+
+      if (distance < shortest) {
+        shortest = distance;
+        nearest = index;
+      }
+    });
+
+    if (nearest >= 0) discover(nearest);
+  }
+
+  canvas.addEventListener("click", pickStar);
+
+  randomButton.addEventListener("click", () => {
+    if (stars.length) {
+      discover(Math.floor(Math.random() * stars.length));
+    }
+  });
+
+  resetButton.addEventListener("click", () => {
+    makeStars();
+    draw(performance.now());
+  });
+
+  window.addEventListener("resize", resize);
+
+  resize();
+  animationId = requestAnimationFrame(animate);
+})();
 </script>
 </body>
 </html>
